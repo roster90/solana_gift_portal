@@ -76,6 +76,7 @@ pub struct SendSol<'info> {
     #[account(mut)]
     from: Signer<'info>,
     #[account(mut)]
+    /// CHECK:
     to: AccountInfo<'info>,
     system_program: Program<'info, System>,
 }

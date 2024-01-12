@@ -9,7 +9,7 @@ import {Connection, Keypair, PublicKey, clusterApiUrl} from '@solana/web3.js';
 import {Program, AnchorProvider, web3, utils, BN} from '@project-serum/anchor';
 import {Buffer} from 'buffer';
 import { getWalletFromJson } from "./createKeyPair";
-import kp from './keypair.json'
+import kp from './gifportal-keypair.json'
 window.Buffer = Buffer;
 
 // Constants
@@ -127,13 +127,16 @@ const App = () => {
     const program = new Program(idl, programID, provider);
     const  amount = new BN(0.1 * web3.LAMPORTS_PER_SOL);
 
-    await program.rpc.sendSol(amount,{
+   const tx = await program.rpc.sendSol(amount,{
       accounts:{
         from: provider.wallet.publicKey,
         to: user,
         systemProgram: SystemProgram.programId
       }
      });
+     console.log("tip success at tx: ",tx);
+     const balance = await provider.connection.getBalance(user);
+     console.log(`balance of address${user} `,balance / web3.LAMPORTS_PER_SOL);
   }
   const createGiftAccount = async () =>{
     try {
