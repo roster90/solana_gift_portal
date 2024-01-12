@@ -16,11 +16,7 @@ window.Buffer = Buffer;
 const TWITTER_HANDLE = "_buildspace";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
-const TEST_GIFS = [
-  "https://i.ibb.co/3B3r3Kg/VERVE.jpg",
-  "https://i.ibb.co/mGdVJcP/METO.jpg",
-  "https://i.ibb.co/NmKPt6s/GQ.jpg"
-]
+
 const baseAccount = getWalletFromJson(kp)
 
 const programID = new PublicKey(idl.metadata.address)
@@ -125,6 +121,20 @@ const App = () => {
       console.log(error);
     }
   }
+
+  const tipSol = async (user)=>{
+    const provider = getProvider();
+    const program = new Program(idl, programID, provider);
+    const  amount = new BN(0.1 * web3.LAMPORTS_PER_SOL);
+
+    await program.rpc.sendSol(amount,{
+      accounts:{
+        from: provider.wallet.publicKey,
+        to: user,
+        systemProgram: SystemProgram.programId
+      }
+     });
+  }
   const createGiftAccount = async () =>{
     try {
       const provider = getProvider();
@@ -189,6 +199,8 @@ const App = () => {
               { giftsList.map(( item, index)=>(
                 <div  className="gif-item" key={index}>
                   <img src={item.giftLink} alt={item.giftLink} className="gif"/>
+                  <br></br>
+                  <button type="submit" className="tip-button  success-gif-button" onClick={ ()=> tipSol(item.userAddress)}>Tip</button>
   
                 </div>
               ))

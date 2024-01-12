@@ -2,3 +2,5 @@
 add into Cargo.toml file:  ahash = "=0.8.6"
 
 - space=9000 : so byte luu tru cua account
+
+- deploy: anchor deploy

@@ -5,7 +5,7 @@ seeds = false
 skip-lint = false
 
 [programs.localnet]
-gifportal = "EtcaC8PatJ8YNpRXzUzgirCj822UZoorh8y8e6nHapq9"
+gifportal = "5tzyMy3NYB8C93QircdAPEf1QP7GDFWRZ9K8D6imbivx"
 
 [registry]
 url = "https://api.apr.dev"

@@ -3,7 +3,7 @@ use anchor_lang::solana_program::entrypoint::ProgramResult;
 
 // use anchor_lang::solana_program::msg;
 
-declare_id!("EtcaC8PatJ8YNpRXzUzgirCj822UZoorh8y8e6nHapq9");
+declare_id!("5tzyMy3NYB8C93QircdAPEf1QP7GDFWRZ9K8D6imbivx");
 
 #[program]
 pub mod gifportal {
