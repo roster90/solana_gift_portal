@@ -1,0 +1,892 @@
+{
+  "version": "0.1.0",
+  "name": "crowdfunding",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenInfo",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "raiseToken",
+          "type": "string"
+        },
+        {
+          "name": "rate",
+          "type": "u16"
+        },
+        {
+          "name": "openTimestamp",
+          "type": "u32"
+        },
+        {
+          "name": "allocationDuration",
+          "type": "u32"
+        },
+        {
+          "name": "fcfsDuration",
+          "type": "u32"
+        },
+        {
+          "name": "cap",
+          "type": "u64"
+        },
+        {
+          "name": "releaseToken",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "modifyRounds",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "nameList",
+          "type": {
+            "vec": "string"
+          }
+        },
+        {
+          "name": "durationList",
+          "type": {
+            "vec": "u32"
+          }
+        },
+        {
+          "name": "classList",
+          "type": {
+            "vec": {
+              "defined": "RoundClass"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "modifyRound",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "index",
+          "type": "i32"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "durationSeconds",
+          "type": "u32"
+        },
+        {
+          "name": "class",
+          "type": {
+            "defined": "RoundClass"
+          }
+        }
+      ]
+    },
+    {
+      "name": "modifyRoundAllocations",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "index",
+          "type": "u32"
+        },
+        {
+          "name": "tierAllocations",
+          "type": {
+            "vec": "u64"
+          }
+        }
+      ]
+    },
+    {
+      "name": "modifyTier",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "index",
+          "type": "u32"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "modifyTiers",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "nameList",
+          "type": {
+            "vec": "string"
+          }
+        }
+      ]
+    },
+    {
+      "name": "modifyTierAllocated",
+      "docs": [
+        "* them hoac remove address vao allocation cua tier"
+      ],
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "index",
+          "type": "u32"
+        },
+        {
+          "name": "addresses",
+          "type": {
+            "vec": "string"
+          }
+        },
+        {
+          "name": "remove",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "setupReleaseToken",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "tokenInfo",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "token",
+          "type": "string"
+        },
+        {
+          "name": "pair",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "setupReleases",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "fromTimestamps",
+          "type": {
+            "vec": "u32"
+          }
+        },
+        {
+          "name": "toTimestamps",
+          "type": {
+            "vec": "u32"
+          }
+        },
+        {
+          "name": "percents",
+          "type": {
+            "vec": "u16"
+          }
+        }
+      ]
+    },
+    {
+      "name": "setClosed",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "close",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "setCap",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "cap",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "setRate",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "rate",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "setOpenTimestamp",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "openTimestamp",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "transferNativeToken",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "to",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "transferToken",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "token",
+          "type": "publicKey"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "to",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "participate",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "token",
+          "type": "publicKey"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "testParticipate",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "token",
+          "type": "publicKey"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "claim",
+      "accounts": [
+        {
+          "name": "idoInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "index",
+          "type": "u16"
+        },
+        {
+          "name": "claimant",
+          "type": "publicKey"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "IdoAccountInfo",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "raiseToken",
+            "type": "publicKey"
+          },
+          {
+            "name": "rate",
+            "type": "u16"
+          },
+          {
+            "name": "openTimestamp",
+            "type": "u32"
+          },
+          {
+            "name": "cap",
+            "type": "u64"
+          },
+          {
+            "name": "participated",
+            "type": "u64"
+          },
+          {
+            "name": "participatedCount",
+            "type": "u32"
+          },
+          {
+            "name": "closed",
+            "type": "bool"
+          },
+          {
+            "name": "releaseToken",
+            "type": "publicKey"
+          },
+          {
+            "name": "releaseTokenPair",
+            "type": "publicKey"
+          },
+          {
+            "name": "tiers",
+            "type": {
+              "vec": {
+                "defined": "TierItem"
+              }
+            }
+          },
+          {
+            "name": "rounds",
+            "type": {
+              "vec": {
+                "defined": "RoundItem"
+              }
+            }
+          },
+          {
+            "name": "releases",
+            "type": {
+              "vec": {
+                "defined": "ReleaseItem"
+              }
+            }
+          },
+          {
+            "name": "releaseTokenDecimals",
+            "type": "u8"
+          },
+          {
+            "name": "raiseTokenDecimals",
+            "type": "u8"
+          },
+          {
+            "name": "owner",
+            "type": "publicKey"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "RoundItem",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "durationSeconds",
+            "type": "u32"
+          },
+          {
+            "name": "class",
+            "type": {
+              "defined": "RoundClass"
+            }
+          },
+          {
+            "name": "tierAllocations",
+            "type": {
+              "vec": "u64"
+            }
+          },
+          {
+            "name": "participated",
+            "type": {
+              "vec": {
+                "defined": "Participated"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Participated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "address",
+            "type": "publicKey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ReleaseItem",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "fromTimestamp",
+            "type": "u32"
+          },
+          {
+            "name": "toTimestamp",
+            "type": "u32"
+          },
+          {
+            "name": "percent",
+            "type": "u16"
+          },
+          {
+            "name": "claimed",
+            "type": {
+              "vec": {
+                "defined": "ClaimedAmount"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ClaimedAmount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "address",
+            "type": "publicKey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TierItem",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "allocated",
+            "type": {
+              "vec": {
+                "defined": "AllocateTier"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "AllocateTier",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "address",
+            "type": "publicKey"
+          },
+          {
+            "name": "allocated",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RoundClass",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Allocation"
+          },
+          {
+            "name": "FcfsPrepare"
+          },
+          {
+            "name": "Fcfs"
+          }
+        ]
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "ParticipateEvent",
+      "fields": [
+        {
+          "name": "amount",
+          "type": "u64",
+          "index": false
+        },
+        {
+          "name": "address",
+          "type": "publicKey",
+          "index": false
+        }
+      ]
+    },
+    {
+      "name": "ClaimEvent",
+      "fields": [
+        {
+          "name": "index",
+          "type": "u16",
+          "index": false
+        },
+        {
+          "name": "address",
+          "type": "publicKey",
+          "index": false
+        },
+        {
+          "name": "remaining",
+          "type": "u64",
+          "index": false
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "PdaNotMatched",
+      "msg": "PDA account not matched"
+    },
+    {
+      "code": 6001,
+      "name": "NotAuthorized",
+      "msg": "Only authority is allowed to call this function"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidInDex",
+      "msg": "Invalid round index"
+    }
+  ]
+}

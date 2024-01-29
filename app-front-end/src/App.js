@@ -10,7 +10,12 @@ import {Program, AnchorProvider, web3, utils, BN} from '@project-serum/anchor';
 import {Buffer} from 'buffer';
 import { getWalletFromJson } from "./createKeyPair";
 import kp from './gifportal-keypair.json'
+
+let idl_crowdfunding =  './idl/crowdfunding.json'
+
 window.Buffer = Buffer;
+
+const ido_Address = new PublicKey("EouwyZ1LH1r3Tx8ePRgBLpSFAQ9BF6k5jwcRMwJHiH9X");
 
 // Constants
 const TWITTER_HANDLE = "_buildspace";
@@ -86,9 +91,9 @@ const App = () => {
   
 
     if(walletAddress){
-      // createAccount();
       getGistList()
     }
+
   },[walletAddress])
 
   const getGistList = async ()=>{
